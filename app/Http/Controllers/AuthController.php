@@ -34,7 +34,12 @@ class AuthController extends Controller
                 ],403
             );
         }
-        $token = $user->createToken('main')->plainTextToken;
+        // $token = $user->createToken('main')->plainTextToken;
+        try {
+            $token = $user->createToken('main')->plainTextToken;
+        } catch (\Exception $e) {
+            return response(['error' => $e->getMessage()], 500);
+        }
     return response([
        'user' =>$user,
        'token' => $token

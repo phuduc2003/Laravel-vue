@@ -1,9 +1,10 @@
 import { createStore } from "vuex";
-
+import * as actions from './actions';
+import * as mutations from './mutations';
 const store = createStore({
     state:{
       user:{
-        token: null,
+        token: sessionStorage.getItem('TOKEN'),
         data:{
 
         }
@@ -12,11 +13,7 @@ const store = createStore({
     getters:{
 
     },
-    actions:{
-
-    },
-    mutations:{
-
-    },
+    actions,
+    mutations,
 })
 export default store

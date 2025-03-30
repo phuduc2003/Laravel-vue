@@ -30,10 +30,10 @@
                 class="block w-full rounded-md bg-white px-3 py-1.5  text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 v-model="user.password" placeholder="Password" />
             </div>
-<div class="flex justify-between items-center w-full mt-4 mb-4">
+            <div class="flex justify-between items-center w-full mt-4 mb-4">
             <div class="inline-flex items-center text-indigo-600 font-semibold">
            
-              <label class="flex items-center cursor-pointer relative">
+              <label class="flex items-center cursor-pointer relative mr-1">
                 <input type="checkbox" checked
                   class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-indigo-600 checked:border-indigo-600"
                   id="check6" v-model="user.remember" />
@@ -48,7 +48,7 @@
                 </span>
             
               </label>
-              Remember password
+              Remember me
             </div>
                <div class="text-sm text-indigo-600 font-semibold hover:text-indigo-500">
                 <router-link :to="{name:'requestPassword'}" >Forgot password?</router-link> 
@@ -72,6 +72,7 @@
 import { ref } from 'vue';
 import GuestLayout from '../components/GuestLayout.vue';
 import store from '../store';
+import router from '../router';
 
 let loading = ref(false);
 let errorMsg = ref("");
@@ -83,13 +84,16 @@ const user = {
 }
 function login(){
    loading.value = true;
+  
+   
    store.dispatch('login',user).then(()=>{
     loading.value = false;
-    router.push({name:'app.dashboard'})
+    router.push({name:'app.dashboard'});
    })
    .catch((response)=>{
     loading.value = false;
-    errorMsg.value
+    console.log(response);
+    errorMsg.value = response.data.message;
    })
 }
 </script>
