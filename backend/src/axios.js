@@ -16,10 +16,10 @@ const axiosClient = axios.create({
     return response;
   }, error => {
     if (error.response.status === 401) {
-      store.commit('setToken', null)
+     sessionStorage.removeItem('TOKEN')
       router.push({name: 'login'})
     }
-    console.error(error);
+    throw error;
   })
   
   export default axiosClient;

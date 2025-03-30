@@ -7,7 +7,7 @@
       <div>
         <MenuButton class="flex items-center">
         <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/00/005ca3ff98b7c45286ca1c9a3c4eb3a842de57c8_full.jpg" alt="" class="rounded-full w-8 mr-2">
-        <small> John Smith </small>
+        <small> {{currentUser.name}} </small>
           <ChevronDownIcon
             class="h-5 w-5 text-violet-200 hover:text-violet-100"
             aria-hidden="true"
@@ -75,7 +75,10 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
 import store from '../store';
 import router from '../router';
+import { computed } from 'vue';
 const emit = defineEmits(['toggle-sidebar'])
+
+const currentUser = computed(()=>store.state.user.data);
 
 function logout(){
   store.dispatch('logout').then(()=>{
