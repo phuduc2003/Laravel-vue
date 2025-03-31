@@ -1,4 +1,4 @@
-import Products from "../views/Products.vue";
+import Products from "../views/Products/Products.vue";
 
 const state ={
     user:{
